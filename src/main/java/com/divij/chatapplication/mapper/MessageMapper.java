@@ -16,8 +16,8 @@ public class MessageMapper {
 		
 		message.setMessageContent(messageDto.getMessage());
 		message.setMessageTimestamp(new Timestamp((new Date()).getTime()));
-		message.setReceiver(new User(messageDto.getFriendId()));
-		message.setSender(new User("Divij"));
+//		message.setReceiver(new User(messageDto.getFriendId()));
+//		message.setSender(new User("Divij"));
 		
 		return message;
 	}

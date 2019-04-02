@@ -2,14 +2,20 @@ package com.divij.chatapplication.exception;
 
 public class BusinessException {
 
-	private int exceptionCode;
+	private String exceptionCode;
 	private String exceptionMessage;
 
-	public int getExceptionCode() {
+	public BusinessException(String exceptionCode, String exceptionMessage) {
+		super();
+		this.exceptionCode = exceptionCode;
+		this.exceptionMessage = exceptionMessage;
+	}
+
+	public String getExceptionCode() {
 		return exceptionCode;
 	}
 
-	public void setExceptionCode(int exceptionCode) {
+	public void setExceptionCode(String exceptionCode) {
 		this.exceptionCode = exceptionCode;
 	}
 
@@ -20,5 +26,12 @@ public class BusinessException {
 	public void setExceptionMessage(String exceptionMessage) {
 		this.exceptionMessage = exceptionMessage;
 	}
+
+	@Override
+	public String toString() {
+		return "BusinessException [exceptionCode=" + exceptionCode + ", exceptionMessage=" + exceptionMessage + "]";
+	}
+	
+	
 
 }

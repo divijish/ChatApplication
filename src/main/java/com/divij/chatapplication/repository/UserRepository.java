@@ -5,13 +5,18 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.divij.chatapplication.entity.User;
+import com.divij.chatapplication.entity.UserAuth;
 
 @Repository
 public interface UserRepository {
 
 	public List<User> getUsers();
 
-	public void saveUser(User user);
+	public void createUser(User user);
 
-	User getUserById(String userId);
+	public User getUserByName(String userId);
+
+	public boolean checkIfUserExists(String userName);
+
+	public void registerUser(UserAuth userAuth);
 }

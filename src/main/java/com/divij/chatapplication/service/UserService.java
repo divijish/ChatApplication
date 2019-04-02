@@ -4,11 +4,14 @@
 package com.divij.chatapplication.service;
 
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import com.divij.chatapplication.dto.UserDto;
-import com.divij.chatapplication.dto.UserListDto;
+import com.divij.chatapplication.dto.UserRegistrationDto;
+import com.divij.chatapplication.dto.UserStatusDto;
 import com.divij.chatapplication.entity.User;
+import com.divij.chatapplication.exception.BusinessException;
 
 /**
  * @author divij
@@ -17,9 +20,9 @@ import com.divij.chatapplication.entity.User;
 @Service
 public interface UserService {
 
-	public UserListDto getUsers();
+	public List<UserStatusDto> getUsers();
 
-	void saveUser(UserDto userDto);
+	List<BusinessException> createUser(UserRegistrationDto userDto);
 
 	User getUserById(String userId);
 }

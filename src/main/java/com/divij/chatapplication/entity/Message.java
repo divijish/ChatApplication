@@ -33,6 +33,17 @@ public class Message {
 	
 	@Column(name="MD_MSG_TMSTMP")
 	private Timestamp messageTimestamp;
+	
+	@Column(name="MD_IS_READ")
+	private boolean isRead;
+
+	public boolean isRead() {
+		return isRead;
+	}
+
+	public void setRead(boolean isRead) {
+		this.isRead = isRead;
+	}
 
 	public int getMessageId() {
 		return messageId;

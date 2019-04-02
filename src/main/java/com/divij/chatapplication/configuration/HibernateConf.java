@@ -38,6 +38,9 @@ public class HibernateConf {
 
 	@Value("${hibernate.dialect}")
 	private String HIBERNATE_DIALECT;
+	
+	@Value("${hibernate.show_sql}")
+	private String HIBERNATE_SHOW_SQL;
 
 	@Bean
 	public LocalSessionFactoryBean sessionFactory() {
@@ -69,6 +72,7 @@ public class HibernateConf {
 		Properties hibernateProperties = new Properties();
 		hibernateProperties.setProperty(ConfigEnum.HIBERNATE_HBM2DDL.getValue(), HIBERNATE_HBM2DDL);
 		hibernateProperties.setProperty(ConfigEnum.HIBERNATE_DIALECT.getValue(), HIBERNATE_DIALECT);
+		hibernateProperties.setProperty(ConfigEnum.SHOW_SQL.getValue(), HIBERNATE_SHOW_SQL);
 		return hibernateProperties;
 	}
 }

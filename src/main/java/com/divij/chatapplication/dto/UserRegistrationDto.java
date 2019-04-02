@@ -1,9 +1,9 @@
 package com.divij.chatapplication.dto;
 
-public class UserStatusDto {
+public class UserRegistrationDto {
 
 	private String userName;
-	private boolean onlineStatus;
+	private String password;
 
 	public String getUserName() {
 		return userName;
@@ -13,12 +13,14 @@ public class UserStatusDto {
 		this.userName = userName;
 	}
 
-	public boolean isOnlineStatus() {
-		return onlineStatus;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setOnlineStatus(boolean onlineStatus) {
-		this.onlineStatus = onlineStatus;
+	public void setPassword(String password) {
+		this.password = password;
 	}
+	
+	
 
 }
