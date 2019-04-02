@@ -24,7 +24,7 @@ public class Message {
 	@Column(name="MD_RCVR")
 	private User receiver;
 	
-	@Column(name="MD_MSE_CNTNT")
+	@Column(name="MD_MSG_CNTNT")
 	private String messageContent;
 	
 	@Column(name="MD_MSG_TMSTMP")
