@@ -4,27 +4,30 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="MESSAGE_DTL")
+@Table(name="MSG_DTL")
 public class Message {
 
 	@Id
-	@Column(name="MESSAGE_ID")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="MD_MSG_ID")
 	private int messageId;
 	
-	@Column(name="SENDER")
+	@Column(name="MD_SNDR")
 	private User sender;
 	
-	@Column(name="RECEIVER")
+	@Column(name="MD_RCVR")
 	private User receiver;
 	
-	@Column(name="MESSAGE_CONTENT")
+	@Column(name="MD_MSE_CNTNT")
 	private String messageContent;
 	
-	@Column(name="message_tmstmp")
+	@Column(name="MD_MSG_TMSTMP")
 	private Timestamp messageTimestamp;
 
 	public int getMessageId() {

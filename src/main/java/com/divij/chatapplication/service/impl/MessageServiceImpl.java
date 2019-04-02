@@ -3,8 +3,9 @@ package com.divij.chatapplication.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.divij.chatapplication.dto.MessageDto;
-import com.divij.chatapplication.service.MessageRepository;
+import com.divij.chatapplication.dto.ReceivedMessageDto;
+import com.divij.chatapplication.entity.Message;
+import com.divij.chatapplication.repository.MessageRepository;
 import com.divij.chatapplication.service.MessageService;
 import com.divij.chatapplication.value.object.MessageVO;
 
@@ -15,13 +16,21 @@ public class MessageServiceImpl implements MessageService {
 	private MessageRepository messageRepositoryImpl;
 	
 	@Override
-	public MessageDto getMessages() {
+	public ReceivedMessageDto getMessages() {
 		
-		MessageDto messageDto = new MessageDto();
+		ReceivedMessageDto messageDto = new ReceivedMessageDto();
 		MessageVO messageVO = new MessageVO();
 		
 		
 		return null;
+	}
+
+	@Override
+	public void saveMessage(ReceivedMessageDto messageDto) {
+		
+		Message message = new Message();
+		
+		messageRepositoryImpl.saveMessage(message);
 	}
 
 }

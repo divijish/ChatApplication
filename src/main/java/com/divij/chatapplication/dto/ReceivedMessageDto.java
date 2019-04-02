@@ -1,6 +1,6 @@
 package com.divij.chatapplication.dto;
 
-public class MessageDto {
+public class ReceivedMessageDto{
 
 	private String message;
 	private String friendId;

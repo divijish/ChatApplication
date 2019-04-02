@@ -2,21 +2,23 @@ package com.divij.chatapplication.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="USER")
+@Table(name="USR_DTL")
 public class User {
 	
 	@Id
-	@Column(name = "USER_ID")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "UD_USR_ID")
 	private int userId;
 	
-	@Column(name = "USER_NAME")
+	@Column(name = "UD_USR_NM")
 	private String userName;
 
-	
 	
 	public int getUserId() {
 		return userId;

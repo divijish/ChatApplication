@@ -6,27 +6,33 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.divij.chatapplication.dto.MessageDto;
+import com.divij.chatapplication.dto.ReceivedMessageDto;
+import com.divij.chatapplication.dto.Response;
 import com.divij.chatapplication.service.MessageService;
 
 @RestController
 public class ChatApiController {
-	
+
 	@Autowired
 	private MessageService messageServiceImpl;
-	
+
 	@GetMapping("/messages")
-	public Object getMessages() {
-		
-		MessageDto messageDto = messageServiceImpl.getMessages();
-		
-		return messageDto;
+	public Response<ReceivedMessageDto> getMessages() {
+
+		Response<ReceivedMessageDto> response = new Response<>();
+		ReceivedMessageDto messageDto = messageServiceImpl.getMessages();
+		response.setResult(messageDto);
+		return response;
 	}
-	
+
 	@PostMapping("/message")
-	public Object saveMessages(@RequestBody final MessageDto messageDto) {
+	public Response<String> saveMessage(@RequestBody final ReceivedMessageDto messageDto) {
+
+		Response<String> response = new Response<>();
 		
-		return "Hello";
+		messageServiceImpl.saveMessage(messageDto);
+
+		return response;
 	}
 
 }
