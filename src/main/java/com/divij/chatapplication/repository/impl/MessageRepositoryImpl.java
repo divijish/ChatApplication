@@ -1,5 +1,8 @@
 package com.divij.chatapplication.repository.impl;
 
+import java.util.List;
+
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.hibernate.Session;
@@ -21,5 +24,16 @@ public class MessageRepositoryImpl implements MessageRepository {
 
 		Session session = sessionFactory.getCurrentSession();
 		session.save(message);
+	}
+	
+	public List<Message>getMessages(final String userName) {
+		
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("From Message message where usr.userName = :name");
+		query.setParameter("name", userName);
+		List<Message> messages = query.getResultList();
+		return messages;
+		
+		
 	}
 }
