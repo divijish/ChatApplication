@@ -1,5 +1,7 @@
 package com.divij.chatapplication.repository;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.divij.chatapplication.entity.Message;
@@ -8,6 +10,10 @@ import com.divij.chatapplication.entity.Message;
 public interface MessageRepository {
 
 	void saveMessage(Message message);
+	
+	List<Message> fetchMessages(String senderId, String receiverId);
+
+	List<Message> getMessages(String userName);
 	
 
 }

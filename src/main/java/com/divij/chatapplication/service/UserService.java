@@ -24,5 +24,7 @@ public interface UserService {
 
 	List<BusinessException> createUser(UserRegistrationDto userDto);
 
-	User getUserById(String userId);
+	User getUserByUserName(String userId);
+
+	boolean checkIfUserExists(String userName);
 }

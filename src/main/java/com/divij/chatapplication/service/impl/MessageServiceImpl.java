@@ -1,16 +1,19 @@
 package com.divij.chatapplication.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.divij.chatapplication.dto.ReceivedMessageDto;
 import com.divij.chatapplication.entity.Message;
 import com.divij.chatapplication.entity.User;
+import com.divij.chatapplication.exception.BusinessException;
 import com.divij.chatapplication.mapper.MessageMapper;
 import com.divij.chatapplication.repository.MessageRepository;
 import com.divij.chatapplication.service.MessageService;
 import com.divij.chatapplication.service.UserService;
-import com.divij.chatapplication.value.object.MessageVO;
 
 @Service
 public class MessageServiceImpl implements MessageService {
@@ -24,31 +27,83 @@ public class MessageServiceImpl implements MessageService {
 	@Autowired
 	private UserService userServiceImpl;
 
+	/*
+	 * This method fetches messages in list of entity and maps it to another list of
+	 * dto and returns it.
+	 * 
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.divij.chatapplication.service.MessageService#fetchMessages(java.lang.
+	 * String, java.lang.String)
+	 */
 	@Override
-	public ReceivedMessageDto getMessages() {
+	public List<ReceivedMessageDto> fetchMessages(String senderId, String receiverId) {
 
-		ReceivedMessageDto messageDto = new ReceivedMessageDto();
-		MessageVO messageVO = new MessageVO();
+		List<Message> messageList = messageRepositoryImpl.fetchMessages(senderId, receiverId);
 
-		return null;
+		List<ReceivedMessageDto> messageDtoList = messageList.stream()
+
+				.map(message -> messageMapper.mapEntityToDto(message, new ReceivedMessageDto()))
+
+				.collect(Collectors.toList());
+
+		return messageDtoList;
 	}
 
 	/*
-	 * Here, always the person(friend) whom the logged in user is chatting with will
-	 * be on the receiving side of the message.
+	 * This method checks if the receiver and sender users exist in db and if they
+	 * do exist then saves the message otherwise returns business exceptions stating
+	 * the same. (non-Javadoc)
+	 * 
+	 * @see com.divij.chatapplication.service.MessageService#saveMessage(com.divij.
+	 * chatapplication.dto.ReceivedMessageDto, java.lang.String, java.lang.String,
+	 * java.util.List)
 	 */
 	@Override
-	public void saveMessage(ReceivedMessageDto messageDto) {
+	public List<BusinessException> saveMessage(final ReceivedMessageDto messageDto, final String senderId,
+			final String receiverId, List<BusinessException> businessExceptions) {
 
-		Message message = new Message();
+		boolean senderExists = userServiceImpl.checkIfUserExists(senderId);
 
-		message = messageMapper.mapDtoToEntity(messageDto, message);
-		User receiverUser = userServiceImpl.getUserById(messageDto.getFriendId());
-		User loggedUser = userServiceImpl.getUserById("Divij");
-		message.setReceiver(receiverUser);
-		message.setSender(loggedUser);
+		boolean receiverExists = userServiceImpl.checkIfUserExists(receiverId);
 
-		messageRepositoryImpl.saveMessage(message);
+		if (senderExists && receiverExists) {
+
+			Message message = new Message();
+
+			message = messageMapper.mapDtoToEntity(messageDto, message);
+
+			User receiverUser = userServiceImpl.getUserByUserName(receiverId);
+
+			User loggedUser = userServiceImpl.getUserByUserName(senderId);
+
+			message.setReceiver(receiverUser);
+
+			message.setSender(loggedUser);
+
+			messageRepositoryImpl.saveMessage(message);
+
+		}
+
+		else {
+
+			if (!senderExists) {
+
+				businessExceptions.add(new BusinessException("CA1002", "Sender does not exist."));
+
+			}
+
+			if (!receiverExists) {
+
+				businessExceptions.add(new BusinessException("CA1003", "Receiver does not exist."));
+
+			}
+
+		}
+
+		return businessExceptions;
+
 	}
 
 }

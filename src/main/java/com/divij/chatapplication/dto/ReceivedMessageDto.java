@@ -1,9 +1,23 @@
 package com.divij.chatapplication.dto;
 
-public class ReceivedMessageDto{
+import java.sql.Timestamp;
+
+/*
+ *This Data Transaction Object is used to receive messages send by the other user to the logged in user. 
+ * 
+ */
+public class ReceivedMessageDto {
 
 	private String message;
-	private String friendId;
+	private Timestamp messageTime;
+
+	public Timestamp getMessageTime() {
+		return messageTime;
+	}
+
+	public void setMessageTime(Timestamp messageTime) {
+		this.messageTime = messageTime;
+	}
 
 	public String getMessage() {
 		return message;
@@ -11,14 +25,6 @@ public class ReceivedMessageDto{
 
 	public void setMessage(String message) {
 		this.message = message;
-	}
-
-	public String getFriendId() {
-		return friendId;
-	}
-
-	public void setFriendId(String friendId) {
-		this.friendId = friendId;
 	}
 
 }
