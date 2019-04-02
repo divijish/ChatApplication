@@ -6,6 +6,7 @@ package com.divij.chatapplication.service;
 
 import org.springframework.stereotype.Service;
 
+import com.divij.chatapplication.dto.UserDto;
 import com.divij.chatapplication.dto.UserListDto;
 
 /**
@@ -16,4 +17,6 @@ import com.divij.chatapplication.dto.UserListDto;
 public interface UserService {
 
 	public UserListDto getUsers();
+
+	void saveUser(UserDto userDto);
 }

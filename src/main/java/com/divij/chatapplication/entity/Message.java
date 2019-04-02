@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,10 +20,12 @@ public class Message {
 	@Column(name="MD_MSG_ID")
 	private int messageId;
 	
-	@Column(name="MD_SNDR")
+	@ManyToOne
+	@JoinColumn(name="MD_SNDR")
 	private User sender;
 	
-	@Column(name="MD_RCVR")
+	@ManyToOne
+	@JoinColumn(name="MD_RCVR")
 	private User receiver;
 	
 	@Column(name="MD_MSG_CNTNT")

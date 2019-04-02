@@ -1,14 +1,13 @@
 package com.divij.chatapplication.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.divij.chatapplication.dto.Response;
+import com.divij.chatapplication.dto.UserDto;
 import com.divij.chatapplication.dto.UserListDto;
-import com.divij.chatapplication.entity.User;
 import com.divij.chatapplication.service.UserService;
 
 @RestController
@@ -23,5 +22,14 @@ public class UserController {
 		
 		userListDto = userServiceImpl.getUsers();
 		return userListDto;
+	}
+	
+	@PostMapping
+	public Response saveUser(final UserDto userDto) {
+		
+		Response response = new Response();
+		userServiceImpl.saveUser(userDto);
+		response.setResult(true);
+		return response;
 	}
 }

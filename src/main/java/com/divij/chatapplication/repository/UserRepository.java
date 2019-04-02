@@ -11,5 +11,5 @@ public interface UserRepository {
 
 	public List<User> getUsers();
 
-	void saveUser(User user);
+	public void saveUser(User user);
 }
