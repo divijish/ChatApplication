@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.divij.chatapplication.dto.UserDto;
 import com.divij.chatapplication.dto.UserListDto;
+import com.divij.chatapplication.entity.User;
 
 /**
  * @author divij
@@ -19,4 +20,6 @@ public interface UserService {
 	public UserListDto getUsers();
 
 	void saveUser(UserDto userDto);
+
+	User getUserById(String userId);
 }

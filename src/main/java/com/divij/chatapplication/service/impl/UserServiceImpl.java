@@ -50,4 +50,12 @@ public class UserServiceImpl implements UserService {
 		userRepositoryImpl.saveUser(user);
 	}
 
+	@Override
+	public User getUserById(String userName) {
+
+		User user = userRepositoryImpl.getUserById(userName);
+
+		return user;
+	}
+
 }

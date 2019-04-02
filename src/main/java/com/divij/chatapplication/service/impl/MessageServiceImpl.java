@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.divij.chatapplication.dto.ReceivedMessageDto;
 import com.divij.chatapplication.entity.Message;
+import com.divij.chatapplication.mapper.MessageMapper;
 import com.divij.chatapplication.repository.MessageRepository;
 import com.divij.chatapplication.service.MessageService;
 import com.divij.chatapplication.value.object.MessageVO;
@@ -14,6 +15,9 @@ public class MessageServiceImpl implements MessageService {
 
 	@Autowired
 	private MessageRepository messageRepositoryImpl;
+	
+	@Autowired
+	private MessageMapper messageMapper;
 	
 	@Override
 	public ReceivedMessageDto getMessages() {
@@ -29,6 +33,8 @@ public class MessageServiceImpl implements MessageService {
 	public void saveMessage(ReceivedMessageDto messageDto) {
 		
 		Message message = new Message();
+		
+		message = messageMapper.mapDtoToEntity(messageDto, message);
 		
 		messageRepositoryImpl.saveMessage(message);
 	}

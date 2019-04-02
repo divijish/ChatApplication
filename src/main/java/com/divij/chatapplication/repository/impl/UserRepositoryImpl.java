@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.hibernate.Session;
@@ -46,6 +47,18 @@ public class UserRepositoryImpl implements UserRepository {
 
 		session.save(user);
 
+	}
+	
+	@Override
+	public User getUserById(final String userName) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		Query query = session.createQuery("From User usr where usr.usrName=:usrName");
+		query.setParameter("usrName",userName);
+		
+		User user = (User) query.getResultList().get(0);
+		
+		return user;
 	}
 
 }

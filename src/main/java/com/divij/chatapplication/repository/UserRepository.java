@@ -12,4 +12,6 @@ public interface UserRepository {
 	public List<User> getUsers();
 
 	public void saveUser(User user);
+
+	User getUserById(String userId);
 }
