@@ -1,14 +1,18 @@
 package com.divij.chatapplication.repository.impl;
 
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.divij.chatapplication.dto.UserAuthDto;
 import com.divij.chatapplication.repository.LoginRepository;
 
+@Repository
+@Transactional
 public class LoginRepositoryImpl implements LoginRepository {
 
 	@Autowired

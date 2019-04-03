@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
 	 * chatapplication.dto.UserRegistrationDto)
 	 */
 	@Override
-	public List<BusinessException> createUser(final UserRegistrationDto userDto) {
+	public List<BusinessException> registerUser(final UserRegistrationDto userDto) {
 
 		User user = new User();
 

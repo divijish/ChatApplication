@@ -3,9 +3,8 @@ package com.divij.chatapplication.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +32,7 @@ public class ChatApiController {
 	 * logged in user. Here receiver is the logged in user and sender is the other
 	 * person. It returns the received messages(ReceivedMessageDto).
 	 */
+	@CrossOrigin
 	@GetMapping("/message/{receiverId}/{senderId}")
 	public Response<List<ReceivedMessageDto>> receiveMessages(@PathVariable("receiverId") String receiverId,
 
@@ -82,6 +82,7 @@ public class ChatApiController {
 	 * server which can later be retrieved by the other user. Here the sender is the
 	 * logged in user and receiver is the other person.
 	 */
+	@CrossOrigin
 	@PostMapping("/message/{senderId}/{receiverId}")
 	public Response<String> sendMessage(@RequestBody final ReceivedMessageDto messageDto,
 

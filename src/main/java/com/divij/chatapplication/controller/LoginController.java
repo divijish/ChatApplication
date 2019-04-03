@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +24,7 @@ public class LoginController {
 	@Autowired
 	LoginService loginServiceImpl;
 
+	@CrossOrigin
 	@PostMapping(value = "login")
 	public Response login(@RequestBody UserAuthDto userAuthDto) {
 

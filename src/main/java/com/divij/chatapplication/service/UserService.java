@@ -22,7 +22,7 @@ public interface UserService {
 
 	public List<UserStatusDto> getUsers();
 
-	List<BusinessException> createUser(UserRegistrationDto userDto);
+	List<BusinessException> registerUser(UserRegistrationDto userDto);
 
 	User getUserByUserName(String userId);
 

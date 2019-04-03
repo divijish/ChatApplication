@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +15,6 @@ import com.divij.chatapplication.constants.BusinessExceptionEnum;
 import com.divij.chatapplication.dto.Response;
 import com.divij.chatapplication.dto.UserRegistrationDto;
 import com.divij.chatapplication.dto.UserStatusDto;
-import com.divij.chatapplication.entity.User;
 import com.divij.chatapplication.exception.BusinessException;
 import com.divij.chatapplication.service.UserService;
 
@@ -24,6 +24,7 @@ public class UserController {
 	@Autowired
 	UserService userServiceImpl;
 
+	@CrossOrigin
 	@GetMapping("/users")
 	public Response<List<UserStatusDto>> getUsers() {
 		Response<List<UserStatusDto>> response = new Response<>();
@@ -36,6 +37,7 @@ public class UserController {
 		return response;
 	}
 
+	@CrossOrigin
 	@PostMapping("/user")
 	public Response createUser(@RequestBody final UserRegistrationDto userDto) {
 
@@ -48,7 +50,7 @@ public class UserController {
 					.add(BusinessException.getBusinessException(BusinessExceptionEnum.USERNAME_OR_PASSWORD_INVALID));
 		} else {
 
-			businessExceptions = userServiceImpl.createUser(userDto);
+			businessExceptions = userServiceImpl.registerUser(userDto);
 		}
 
 		if (businessExceptions.size() == 0) {
