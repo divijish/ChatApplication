@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.divij.chatapplication.constants.BusinessExceptionEnum;
 import com.divij.chatapplication.dto.ReceivedMessageDto;
 import com.divij.chatapplication.entity.Message;
 import com.divij.chatapplication.entity.User;
@@ -90,14 +91,12 @@ public class MessageServiceImpl implements MessageService {
 
 			if (!senderExists) {
 
-				businessExceptions.add(new BusinessException("CA1002", "Sender does not exist."));
-
+				businessExceptions.add(BusinessException.getBusinessException(BusinessExceptionEnum.NO_SENDER_USER));
 			}
 
 			if (!receiverExists) {
 
-				businessExceptions.add(new BusinessException("CA1003", "Receiver does not exist."));
-
+				businessExceptions.add(BusinessException.getBusinessException(BusinessExceptionEnum.NO_RECEIVER_USER));
 			}
 
 		}

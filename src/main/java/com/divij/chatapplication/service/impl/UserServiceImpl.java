@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.divij.chatapplication.dto.UserRegistrationDto;
+import com.divij.chatapplication.constants.BusinessExceptionEnum;
 import com.divij.chatapplication.dto.UserListDto;
 import com.divij.chatapplication.dto.UserStatusDto;
 import com.divij.chatapplication.entity.User;
@@ -35,7 +36,8 @@ public class UserServiceImpl implements UserService {
 
 	/*
 	 * 
-	 * This method returns List of all the users (UserStatusDto) present in database. (non-Javadoc)
+	 * This method returns List of all the users (UserStatusDto) present in
+	 * database. (non-Javadoc)
 	 * 
 	 * @see com.divij.chatapplication.service.UserService#getUsers()
 	 */
@@ -82,7 +84,7 @@ public class UserServiceImpl implements UserService {
 			userRepositoryImpl.createUser(user);
 		} else {
 
-			businessExceptions.add(new BusinessException("CA1001", "USER WITH PROVIDED NAME ALREADY EXISTS."));
+			businessExceptions.add(BusinessException.getBusinessException(BusinessExceptionEnum.USER_ALREADY_EXISTS));
 		}
 
 		return businessExceptions;

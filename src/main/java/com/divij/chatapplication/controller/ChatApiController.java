@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.divij.chatapplication.constants.BusinessExceptionEnum;
 import com.divij.chatapplication.dto.ReceivedMessageDto;
 import com.divij.chatapplication.dto.Response;
 import com.divij.chatapplication.exception.BusinessException;
@@ -57,13 +58,12 @@ public class ChatApiController {
 		} else {
 			if (!receiverExists) {
 
-				businessExceptions.add(new BusinessException("CA1003", "Receiver does not exist."));
+				businessExceptions.add(BusinessException.getBusinessException(BusinessExceptionEnum.NO_RECEIVER_USER));
 
 			}
 			if (!senderExists) {
 
-				businessExceptions.add(new BusinessException("CA1002", "Sender does not exist."));
-
+				businessExceptions.add(BusinessException.getBusinessException(BusinessExceptionEnum.NO_SENDER_USER));
 			}
 
 			response.setMessage("Could not fetch messages.");
@@ -96,7 +96,7 @@ public class ChatApiController {
 		if (businessExceptions.size() == 0) {
 			response.setMessage("Message successfully sent.");
 			response.setStatus("SUCCESS");
-		}else {
+		} else {
 			response.setMessage("Could not send message.");
 			response.setStatus("FAILED");
 		}

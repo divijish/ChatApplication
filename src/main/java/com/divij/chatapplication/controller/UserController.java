@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.divij.chatapplication.common.CommonUtils;
+import com.divij.chatapplication.constants.BusinessExceptionEnum;
 import com.divij.chatapplication.dto.Response;
 import com.divij.chatapplication.dto.UserRegistrationDto;
 import com.divij.chatapplication.dto.UserStatusDto;
@@ -31,7 +32,7 @@ public class UserController {
 		response.setResult(userList);
 		response.setMessage("Users fetched successfully.");
 		response.setStatus("SUCCESS");
-		
+
 		return response;
 	}
 
@@ -43,7 +44,8 @@ public class UserController {
 		List<BusinessException> businessExceptions = new ArrayList<BusinessException>(0);
 
 		if (CommonUtils.isNullUserRegistrationDto(userDto)) {
-			businessExceptions.add(new BusinessException("CA001", "UserName/Password empty."));
+			businessExceptions
+					.add(BusinessException.getBusinessException(BusinessExceptionEnum.USERNAME_OR_PASSWORD_INVALID));
 		} else {
 
 			businessExceptions = userServiceImpl.createUser(userDto);
