@@ -31,6 +31,8 @@ public class MessageMapper {
 		receivedMessage.setMessage(message.getMessageContent());
 
 		receivedMessage.setMessageTime(message.getMessageTimestamp());
+		
+		receivedMessage.setOperation("RECEIVING");
 
 		return receivedMessage;
 	}

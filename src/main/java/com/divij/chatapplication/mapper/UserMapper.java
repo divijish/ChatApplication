@@ -32,6 +32,7 @@ public class UserMapper {
 		
 		userStatusDto.setUserName(user.getUserName());
 		userStatusDto.setOnlineStatus(true);//assuming everyone is online.
+		userStatusDto.setProfilePicUrl(user.getProfilePicUrl());
 		
 		return userStatusDto;
 	}

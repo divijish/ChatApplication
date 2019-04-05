@@ -4,6 +4,17 @@ public class UserStatusDto {
 
 	private String userName;
 	private boolean onlineStatus;
+	private String profilePicUrl;
+	
+	
+
+	public String getProfilePicUrl() {
+		return profilePicUrl;
+	}
+
+	public void setProfilePicUrl(String profilePicUrl) {
+		this.profilePicUrl = profilePicUrl;
+	}
 
 	public String getUserName() {
 		return userName;

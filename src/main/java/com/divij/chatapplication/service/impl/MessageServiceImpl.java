@@ -48,6 +48,13 @@ public class MessageServiceImpl implements MessageService {
 				.map(message -> messageMapper.mapEntityToDto(message, new ReceivedMessageDto()))
 
 				.collect(Collectors.toList());
+		
+		messageList.stream().forEach(message ->{ 
+			
+			message.setRead(true);
+			messageRepositoryImpl.saveMessage(message);
+			
+		});
 
 		return messageDtoList;
 	}

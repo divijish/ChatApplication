@@ -63,7 +63,7 @@ public class MessageRepositoryImpl implements MessageRepository {
 		Session session = sessionFactory.getCurrentSession();
 
 		Query query = session.createQuery(
-				"From Message msg where msg.sender.userName=:senderId and msg.receiver.userName=:receiverId order by msg.messageTimestamp");
+				"From Message msg where msg.sender.userName=:senderId and msg.receiver.userName=:receiverId and msg.isRead=0 order by msg.messageTimestamp");
 
 		query.setParameter("senderId", senderId);
 		

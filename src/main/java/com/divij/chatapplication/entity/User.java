@@ -18,6 +18,19 @@ public class User {
 
 	@Column(name = "UD_USR_NM")
 	private String userName;
+	
+	@Column(name = "UD_PRFL_PIC_URL")
+	private String profilePicUrl = "https://img.icons8.com/ios-glyphs/30/000000/user.png";
+	
+	
+
+	public String getProfilePicUrl() {
+		return profilePicUrl;
+	}
+
+	public void setProfilePicUrl(String profilePicUrl) {
+		this.profilePicUrl = profilePicUrl;
+	}
 
 	public User() {
 	}
