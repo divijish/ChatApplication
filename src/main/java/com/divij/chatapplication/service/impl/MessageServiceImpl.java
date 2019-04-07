@@ -41,7 +41,7 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public List<ReceivedMessageDto> fetchMessages(String senderId, String receiverId) {
 
-		List<Message> messageList = messageRepositoryImpl.fetchMessages(senderId, receiverId);
+		List<Message> messageList = messageRepositoryImpl.fetchUnreadMessages(senderId, receiverId);
 
 		List<ReceivedMessageDto> messageDtoList = messageList.stream()
 

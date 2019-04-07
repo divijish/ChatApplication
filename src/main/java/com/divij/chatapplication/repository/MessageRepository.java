@@ -11,7 +11,7 @@ public interface MessageRepository {
 
 	void saveMessage(Message message);
 	
-	List<Message> fetchMessages(String senderId, String receiverId);
+	List<Message> fetchUnreadMessages(String senderId, String receiverId);
 
 	List<Message> getMessages(String userName);
 	

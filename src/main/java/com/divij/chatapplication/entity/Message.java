@@ -31,6 +31,19 @@ public class Message {
 	@Column(name="MD_MSG_CNTNT")
 	private String messageContent;
 	
+	public Message() {
+		super();
+	}
+	public Message(Message message) {
+		super();
+		
+		this.messageId = message.getMessageId();
+		this.sender = message.getSender();
+		this.receiver = message.getReceiver();
+		this.messageContent = message.getMessageContent();
+	}
+
+
 	@Column(name="MD_MSG_TMSTMP")
 	private Timestamp messageTimestamp;
 	

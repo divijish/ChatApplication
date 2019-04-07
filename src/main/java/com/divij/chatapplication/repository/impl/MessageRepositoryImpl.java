@@ -1,6 +1,7 @@
 package com.divij.chatapplication.repository.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Query;
 import javax.transaction.Transactional;
@@ -47,8 +48,10 @@ public class MessageRepositoryImpl implements MessageRepository {
 
 	}
 	/*
-	 * This method fetches list of messages in which the sender is user with
-	 * userName as senderId and receiver is user with userName as receiverId.
+	 * This method fetches list of unread messages in which the sender is user with
+	 * userName as senderId and receiver is user with userName as receiverId parameter and after fetching the list 
+	 * of messages, saves the messages back after setting the isRead attribute to true(since the message is read now)
+	 * and returns the list of unread messages.
 	 * 
 	 * (non-Javadoc)
 	 * 
@@ -58,19 +61,34 @@ public class MessageRepositoryImpl implements MessageRepository {
 	 */
 
 	@Override
-	public List<Message> fetchMessages(String senderId, String receiverId) {
+	public List<Message> fetchUnreadMessages(String senderId, String receiverId) {
 
 		Session session = sessionFactory.getCurrentSession();
 
-		Query query = session.createQuery(
-				"From Message msg where msg.sender.userName=:senderId and msg.receiver.userName=:receiverId and msg.isRead=0 order by msg.messageTimestamp");
+		Query query = session.createQuery("From Message msg where msg.sender.userName=:senderId and"
+				+ " msg.receiver.userName=:receiverId and msg.isRead=:readValue order by msg.messageTimestamp");
 
 		query.setParameter("senderId", senderId);
-		
+
 		query.setParameter("receiverId", receiverId);
-		
-		List<Message> messageList = (List<Message>) query.getResultList();
-		
-		return messageList;
+
+		query.setParameter("readValue", false);
+
+		List<Message> unreadMessageList = (List<Message>) query.getResultList();
+
+		List<Message> readMessageList = unreadMessageList.stream().map(message -> {
+
+			Message newMessage = new Message(message);
+
+			return newMessage;
+
+		}).collect(Collectors.toList());
+
+		readMessageList.stream().forEach(message -> {
+			message.setRead(true);
+			session.save(message);
+		});
+
+		return unreadMessageList;
 	}
 }
