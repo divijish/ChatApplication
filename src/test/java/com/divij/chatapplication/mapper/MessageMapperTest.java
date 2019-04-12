@@ -1,5 +1,6 @@
 package com.divij.chatapplication.mapper;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.sql.Timestamp;
@@ -13,9 +14,6 @@ import com.divij.chatapplication.dto.ReceivedMessageDto;
 import com.divij.chatapplication.entity.Message;
 import com.divij.chatapplication.entity.User;
 
-/*
- * Not yet implemented.
- */
 class MessageMapperTest {
 
 	@Autowired
@@ -42,31 +40,16 @@ class MessageMapperTest {
 		message.setSender(sender);
 
 		ReceivedMessageDto receivedMessage = new ReceivedMessageDto();
-//assertEquals() is working fine here.
 		final ReceivedMessageDto receivedMessage2 = messageMapper.mapEntityToDto(message, receivedMessage);
 
-		assertEquals("true1", "true");// compiler is not reaching upto here.
+		assertAll(
+				() -> assertEquals(message.getMessageContent(), receivedMessage2.getMessage(),
+						"Message content should be equal."),
+				() -> assertEquals(message.getMessageTimestamp(), receivedMessage2.getMessageTime(),
+						"Message TimeStamp should be equal"),
+				() -> assertEquals("RECEIVEING", receivedMessage2.getOperation(), "Operation should be equal."));
 
-		// , "1 is only eqlual to 1");//equals(receivedMessage2.getOperation()));
-		/*
-		 * assertAll(() -> assertEquals(message.getMessageContent(),
-		 * receivedMessage2.getMessage()), () ->
-		 * assertEquals(message.getMessageTimestamp(),
-		 * receivedMessage2.getMessageTime()), () -> assertEquals("RECEIVEING",
-		 * receivedMessage2.getOperation()));
-		 */
 		// assert
 
 	}
-	/*
-	 * @Test void exampleTest(){
-	 * 
-	 * assertEquals("tre", "fal"); }
-	 * 
-	 */ /*
-		 * @Test void testMapEntityToDto() {
-		 * 
-		 * 
-		 * }
-		 */
 }
